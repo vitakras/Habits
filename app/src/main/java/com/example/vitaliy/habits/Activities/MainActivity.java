@@ -1,9 +1,11 @@
-package com.example.vitaliy.habits;
+package com.example.vitaliy.habits.Activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.vitaliy.habits.R;
 
 
 public class MainActivity extends ActionBarActivity {
