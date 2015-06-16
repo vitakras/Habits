@@ -8,8 +8,15 @@ import com.example.vitaliy.habits.Interfaces.IHabit;
 public class Habit implements IHabit {
 
     // Variables
+    protected int ID;
     protected String name;
     protected String summary;
+
+    public Habit(int ID, String name, String summary) {
+        this.ID = ID;
+        this.name = name;
+        this.summary = summary;
+    }
 
     public Habit(String name, String summary) {
         this.name = name;
@@ -19,6 +26,16 @@ public class Habit implements IHabit {
     public Habit(String name) {
         this.name = name;
         this.summary = new String ();
+    }
+
+    @Override
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    @Override
+    public int getI() {
+        return this.ID;
     }
 
     @Override

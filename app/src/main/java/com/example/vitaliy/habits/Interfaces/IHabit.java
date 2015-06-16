@@ -6,6 +6,18 @@ package com.example.vitaliy.habits.Interfaces;
 public interface IHabit {
 
     /**
+     * ID of the habit
+     * @param ID
+     */
+    public void setID(int ID);
+
+    /**
+     * ID of the habit
+     * @return
+     */
+    public int getI();
+
+    /**
      * Set the name of the habit
      * @param name of the habit
      */
