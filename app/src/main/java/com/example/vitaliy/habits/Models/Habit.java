@@ -34,7 +34,7 @@ public class Habit implements IHabit {
     }
 
     @Override
-    public int getI() {
+    public int getID() {
         return this.ID;
     }
 

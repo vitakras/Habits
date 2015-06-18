@@ -15,7 +15,7 @@ public interface IHabit {
      * ID of the habit
      * @return
      */
-    public int getI();
+    public int getID();
 
     /**
      * Set the name of the habit
