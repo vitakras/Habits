@@ -2,11 +2,16 @@ package com.example.vitaliy.habits.DB;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.vitaliy.habits.Interfaces.IHabit;
 import com.example.vitaliy.habits.Interfaces.IDatabaseHabits;
+import com.example.vitaliy.habits.Models.Habit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vitaliy on 15-06-17.
@@ -22,21 +27,12 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits 
     // Database Name
     private static final String DATABASE_NAME = "COM.VK.HABITS";
 
-    // Table Names
-    private static final String TABLE_HABIT = "habits";
-
-    // Common column names
-    private static final String KEY_ID = "id";
-
-    // Habits Table - column names
-    private static final String KEY_NAME = "name";
-    private static final String KEY_SUMMARY = "summary";
-
     // Table Create Statements
-    // Todo table create statement
     private static final String CREATE_TABLE_HABIT = "CREATE TABLE "
-            + TABLE_HABIT + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_NAME + " TEXT," + KEY_SUMMARY + " TEXT)";
+            + HabitsContract.HabitColumns.TABLE_NAME + "("
+            + HabitsContract.HabitColumns._ID + " INTEGER PRIMARY KEY,"
+            + HabitsContract.HabitColumns.COLUMN_NAME_NAME + " TEXT,"
+            + HabitsContract.HabitColumns.COLUMN_NAME_SUMMARY + " TEXT)";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,34 +46,76 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // drop older table if exsits
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HABIT);
+        db.execSQL("DROP TABLE IF EXISTS " + HabitsContract.HabitColumns.TABLE_NAME);
 
         // create new table
         onCreate(db);
     }
 
     @Override
-    public void addHabit(IHabit habit) {
+    public long addHabit(IHabit habit) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, habit.getName());
-        values.put(KEY_SUMMARY, habit.getSummary());
+        values.put(HabitsContract.HabitColumns.COLUMN_NAME_NAME, habit.getName());
+        values.put(HabitsContract.HabitColumns.COLUMN_NAME_SUMMARY, habit.getSummary());
 
         // add to table and close
-        db.insert(TABLE_HABIT, null, values);
+        return db.insert(HabitsContract.HabitColumns.TABLE_NAME, null, values);
     }
 
     @Override
-    public void updateHabit(IHabit habit) {
+    public IHabit getHabit(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + HabitsContract.HabitColumns.TABLE_NAME
+                + " WHERE " + HabitsContract.HabitColumns._ID + " = " + id;
+
+        Cursor cursor =  db.rawQuery(query, null);
+
+        if (cursor.moveToNext()) {
+            return populateHabitModel(cursor);
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<IHabit> getAllHabits() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + HabitsContract.HabitColumns.TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(query,null);
+        List<IHabit> habits = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+             habits.add(populateHabitModel(cursor));
+        }
+
+        return habits;
+    }
+
+    @Override
+    public int deleteHabit(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.delete(HabitsContract.HabitColumns.TABLE_NAME,
+                HabitsContract.HabitColumns._ID + " = ?",
+                new String[] { String.valueOf(id) });
+    }
+
+    @Override
+    public long updateHabit(IHabit habit) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, habit.getName());
-        values.put(KEY_SUMMARY, habit.getSummary());
+        values.put(HabitsContract.HabitColumns.COLUMN_NAME_NAME, habit.getName());
+        values.put(HabitsContract.HabitColumns.COLUMN_NAME_SUMMARY, habit.getSummary());
 
-        db.update(TABLE_HABIT,values, KEY_ID + " = ?",
-                new String[] { String.valueOf(habit.getID()) });
+       return  db.update(HabitsContract.HabitColumns.TABLE_NAME,
+               values, HabitsContract.HabitColumns._ID + " = ?",
+               new String[] { String.valueOf(habit.getID()) });
     }
 
     /**
@@ -88,5 +126,20 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits 
         if(db != null && db.isOpen()) {
             db.close();
         }
+    }
+
+    /**
+     * Converts a column query into IHabit
+     * @param cursor the query
+     * @return
+     */
+    private IHabit populateHabitModel(Cursor cursor) {
+        IHabit habit = new Habit();
+
+        habit.setID(cursor.getInt(cursor.getColumnIndex(HabitsContract.HabitColumns._ID)));
+        habit.setName(cursor.getString(cursor.getColumnIndex(HabitsContract.HabitColumns.COLUMN_NAME_NAME)));
+        habit.setSummary(cursor.getString(cursor.getColumnIndex(HabitsContract.HabitColumns.COLUMN_NAME_SUMMARY)));
+
+        return habit;
     }
 }

@@ -12,6 +12,12 @@ public class Habit implements IHabit {
     protected String name;
     protected String summary;
 
+
+    public Habit() {
+        this.name = new String();
+        this.summary = new String();
+    }
+
     public Habit(int ID, String name, String summary) {
         this.ID = ID;
         this.name = name;
