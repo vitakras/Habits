@@ -1,9 +1,45 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.example.vitaliy.habits.Fragments.CreateHabit">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context="com.example.vitaliy.habits.Fragments.CreateHabitFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/habit_name_textfield"
+        android:hint="@string/hint_habit_name"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        />
+
+    <EditText
+        android:id="@+id/habit_summary_textfield"
+        android:layout_below="@id/habit_name_textfield"
+        android:hint="@string/hint_habit_summary"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        />
+
+    <Button
+        android:id="@+id/habit_add_button"
+        android:text="Create Habit"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        />
+
+
+</LinearLayout>

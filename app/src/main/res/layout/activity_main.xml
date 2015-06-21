@@ -4,14 +4,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <fragment
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        >
+        android:layout_height="fill_parent"
+        android:name="com.example.vitaliy.habits.Fragments.CreateHabitFragment"
+        android:id="@+id/fragment"
+        android:layout_centerHorizontal="true"
+        tools:layout="@layout/fragment_create_habit" />
 
-
-    </LinearLayout>
 
 </RelativeLayout>
