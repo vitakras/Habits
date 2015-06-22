@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.vitaliy.habits.Fragments.CreateHabitFragment;
+import com.example.vitaliy.habits.Fragments.ShowAllHabitsFragment;
 import com.example.vitaliy.habits.R;
 
 public class MainActivity extends ActionBarActivity {
@@ -32,7 +32,8 @@ public class MainActivity extends ActionBarActivity {
             }
 
             // Create new fragment to be placed in the activity
-            CreateHabitFragment firstFragment = new CreateHabitFragment();
+            //CreateHabitFragment firstFragment = new CreateHabitFragment();
+            ShowAllHabitsFragment firstFragment = new ShowAllHabitsFragment();
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
