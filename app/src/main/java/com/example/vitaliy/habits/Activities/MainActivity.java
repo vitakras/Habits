@@ -1,18 +1,25 @@
 package com.example.vitaliy.habits.Activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.example.vitaliy.habits.Fragments.CreateHabitFragment;
 import com.example.vitaliy.habits.R;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends ActionBarActivity {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(this.toolbar);
 
         // Make sure fragment container exists
         if (findViewById(R.id.fragment_container) != null) {
@@ -26,6 +33,7 @@ public class MainActivity extends FragmentActivity {
 
             // Create new fragment to be placed in the activity
             CreateHabitFragment firstFragment = new CreateHabitFragment();
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             // Add the fragment to the 'fragment_container' FrameLayout
@@ -34,4 +42,5 @@ public class MainActivity extends FragmentActivity {
             transaction.commit();
         }
     }
+
 }
