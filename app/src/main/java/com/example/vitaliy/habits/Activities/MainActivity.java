@@ -5,10 +5,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.vitaliy.habits.Fragments.CreateHabitFragment;
 import com.example.vitaliy.habits.Fragments.ShowAllHabitsFragment;
 import com.example.vitaliy.habits.R;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements ShowAllHabitsFragment.OnAllHabitsListener {
 
     private Toolbar toolbar;
 
@@ -44,4 +45,14 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    public void onButtonClicked() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        CreateHabitFragment fragment = new CreateHabitFragment();
+
+        transaction.replace(R.id.fragment_container,fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
 }

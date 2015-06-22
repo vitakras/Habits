@@ -96,6 +96,7 @@ public class CreateHabitFragment extends Fragment {
 
         IHabit habit = new Habit(name,summary);
         db.addHabit(habit);
+        db.close();
     }
 
 }

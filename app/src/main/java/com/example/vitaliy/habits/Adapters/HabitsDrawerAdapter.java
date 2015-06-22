@@ -44,11 +44,14 @@ public class HabitsDrawerAdapter extends RecyclerView.Adapter<HabitsDrawerAdapte
     @Override
     public void onBindViewHolder(HabitViewHolder holder, int position) {
         IHabit current = data.get(position);
+
+        holder.name.setText(current.getName());
+        holder.summary.setText(current.getSummary());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.data.size();
     }
 
     /**
@@ -63,7 +66,7 @@ public class HabitsDrawerAdapter extends RecyclerView.Adapter<HabitsDrawerAdapte
             super(viewItem);
 
             this.name = (TextView) viewItem.findViewById(R.id.habit_name_textView);
-            this.name = (TextView) viewItem.findViewById(R.id.habit_summary_textView);
+            this.summary = (TextView) viewItem.findViewById(R.id.habit_summary_textView);
         }
     }
 }

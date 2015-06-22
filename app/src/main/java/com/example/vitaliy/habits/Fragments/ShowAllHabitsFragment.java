@@ -1,12 +1,15 @@
 package com.example.vitaliy.habits.Fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.vitaliy.habits.Adapters.HabitsDrawerAdapter;
 import com.example.vitaliy.habits.DB.DatabaseHelper;
@@ -15,10 +18,12 @@ import com.example.vitaliy.habits.R;
 
 import java.util.List;
 
-public class ShowAllHabitsFragment extends Fragment {
+public class ShowAllHabitsFragment extends Fragment implements View.OnClickListener{
 
     private RecyclerView recyclerView;
+
     private HabitsDrawerAdapter adapter;
+    private OnAllHabitsListener listener;
 
     // Required empty public constructor
     public ShowAllHabitsFragment() {}
@@ -38,7 +43,42 @@ public class ShowAllHabitsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        final ImageButton button = (ImageButton) layout.findViewById(R.id.new_habit_fab);
+        button.setOnClickListener(this);
+
         return layout;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            listener = (OnAllHabitsListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.e("TEST", "" + v.getId());
+        switch (v.getId()) {
+            case R.id.new_habit_fab:
+                listener.onButtonClicked();
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -48,5 +88,13 @@ public class ShowAllHabitsFragment extends Fragment {
     public List<IHabit> getData() {
         DatabaseHelper db = new DatabaseHelper(getActivity().getApplicationContext());
         return db.getAllHabits();
+    }
+
+
+    /**
+     * Interface for changing the fragment for another
+     */
+    public interface OnAllHabitsListener {
+        public void onButtonClicked();
     }
 }

@@ -33,8 +33,20 @@ public class DatabaseTest extends AndroidTestCase {
 
         IHabit returnedModel = db.getHabit(id);
 
-        assertEquals(model.getName(),returnedModel.getName());
-        assertEquals(model.getSummary(),returnedModel.getSummary());
+        assertEquals(model.getName(), returnedModel.getName());
+        assertEquals(model.getSummary(), returnedModel.getSummary());
+    }
+
+
+    public void testGetAllHabits() {
+        IHabit model = getModel();
+
+        db.addHabit(model);
+
+        IHabit returnedModel = db.getAllHabits().get(0);
+
+        assertEquals(model.getName(), returnedModel.getName());
+        assertEquals(model.getSummary(), returnedModel.getSummary());
     }
 
 
