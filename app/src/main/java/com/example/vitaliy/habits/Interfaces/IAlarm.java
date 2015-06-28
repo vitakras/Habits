@@ -2,6 +2,8 @@ package com.example.vitaliy.habits.Interfaces;
 
 import android.net.Uri;
 
+import com.example.vitaliy.habits.Enums.Day;
+
 /**
  * Created by Vitaliy on 15-06-28.
  */
@@ -30,6 +32,13 @@ public interface IAlarm {
      * @param isReapetWeekly
      */
     public void setRepeatWeekly (boolean isReapetWeekly);
+
+    /**
+     * Sets weather to repeat the alarm on a set Day
+     * @param day
+     * @param value
+     */
+    public void setRepeatingDay(Day day, boolean value);
 
     /**
      * Set the is alarm turned on
@@ -72,5 +81,11 @@ public interface IAlarm {
      * @return
      */
     public boolean getEnabled();
+
+    /**
+     * is this day being repeated
+     * @return
+     */
+    public boolean getReapetingDay(Day day);
 
 }
