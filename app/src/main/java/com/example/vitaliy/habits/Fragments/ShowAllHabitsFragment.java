@@ -74,7 +74,7 @@ public class ShowAllHabitsFragment extends Fragment implements View.OnClickListe
         Log.e("TEST", "" + v.getId());
         switch (v.getId()) {
             case R.id.new_habit_fab:
-                listener.onButtonClicked();
+                listener.onAddHabitButtonClicked();
                 break;
             default:
                 break;
@@ -95,6 +95,6 @@ public class ShowAllHabitsFragment extends Fragment implements View.OnClickListe
      * Interface for changing the fragment for another
      */
     public interface OnAllHabitsListener {
-        public void onButtonClicked();
+        public void onAddHabitButtonClicked();
     }
 }

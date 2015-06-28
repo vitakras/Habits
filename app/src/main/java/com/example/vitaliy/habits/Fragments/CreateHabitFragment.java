@@ -41,6 +41,8 @@ public class CreateHabitFragment extends Fragment {
         super.onCreate(savedInstanceState);
         db = new DatabaseHelper(getActivity().getApplicationContext());
 
+
+        setHasOptionsMenu(true);
         // Initilize Titles
         CREATE_HABIT_TITLE = getString(R.string.create_habit_fragment);
         UPDATE_HABIT_TITLE = getString(R.string.update_habit_fragment);
@@ -55,7 +57,7 @@ public class CreateHabitFragment extends Fragment {
         Button button = (Button) layout.findViewById(R.id.habit_add_button);
 
         // Set up Toolbar
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.setTitle(CREATE_HABIT_TITLE);
 
         button.setOnClickListener(new OnClickListener() {
@@ -72,17 +74,18 @@ public class CreateHabitFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.create_habit_menu,menu);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         switch(id) {
             case R.id.create_habit:
                 createNewHabit();
+                return true;
             default:
-                return super.onOptionsItemSelected(item);
+                return getActivity().onOptionsItemSelected(item);
         }
     }
 
