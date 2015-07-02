@@ -8,7 +8,7 @@
         android:id="@+id/delete_habit"
         android:title="@string/delete"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_done"
+        android:icon="@drawable/ic_delete"
         app:showAsAction="ifRoom"
         android:visible="true"
         />

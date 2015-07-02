@@ -2,7 +2,7 @@ package com.example.vitaliy.habits.Activities;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,18 +40,12 @@ public class MainActivity extends ActionBarActivity implements ShowAllHabitsFrag
             //CreateHabitFragment firstFragment = new CreateHabitFragment();
             ShowAllHabitsFragment firstFragment = new ShowAllHabitsFragment();
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
             // Add the fragment to the 'fragment_container' FrameLayout
             transaction.add(R.id.fragment_container, firstFragment);
             transaction.commit();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        super.onResume();
     }
 
     @Override
@@ -64,11 +58,15 @@ public class MainActivity extends ActionBarActivity implements ShowAllHabitsFrag
         int id = item.getItemId();
 
         switch(id) {
+            case R.id.home:
             case android.R.id.home:
-                FragmentManager transaction = getFragmentManager();
+                // Remove Back button
 
-                if (transaction.getBackStackEntryCount() != 0) {
-                    transaction.popBackStack();
+                FragmentManager manager = getFragmentManager();
+
+                if (manager.getBackStackEntryCount() != 0) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                    manager.popBackStack();
                 }
 
                 return true;
@@ -79,12 +77,26 @@ public class MainActivity extends ActionBarActivity implements ShowAllHabitsFrag
 
     @Override
     public void onAddHabitButtonClicked() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         CreateHabitFragment fragment = new CreateHabitFragment();
 
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack so the user can navigate back
         transaction.replace(R.id.fragment_container,fragment);
         transaction.addToBackStack(null);
 
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager manager = getFragmentManager();
+
+        if (manager.getBackStackEntryCount() != 0) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            manager.popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

@@ -1,7 +1,7 @@
 package com.example.vitaliy.habits.Fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,27 +25,60 @@ import static android.view.View.OnClickListener;
  */
 public class CreateHabitFragment extends Fragment {
 
-    public final static String HABIT_ID = "HABIT_ID";
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    public static final String HABIT_ID = "HABIT_ID";
+
     private static String CREATE_HABIT_TITLE;
     private static String UPDATE_HABIT_TITLE;
 
 
-    private DatabaseHelper db;
+    private static DatabaseHelper db;
+    private static IHabit habit;
+    private static int id;
 
     // Required empty public constructor
-    public CreateHabitFragment() {
+    public CreateHabitFragment() {}
+
+    /**
+     * Creates an Instance of the fragment for creating a new habit
+     * @return
+     */
+    public static CreateHabitFragment newInstance() {
+        return new CreateHabitFragment();
     }
 
-    @Override
+    /**
+     * Creates an Instance of the fragment for updating an existing habit
+     * @param id the ID of the habbit to retrive from DB
+     * @return new istance of the CreateHabitFragment fragment
+     */
+    public static CreateHabitFragment newInstance(int id) {
+        CreateHabitFragment fragment = new CreateHabitFragment();
+        Bundle args = new Bundle();
+
+        args.putInt(HABIT_ID, id);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DatabaseHelper(getActivity().getApplicationContext());
-
 
         setHasOptionsMenu(true);
         // Initilize Titles
         CREATE_HABIT_TITLE = getString(R.string.create_habit_fragment);
         UPDATE_HABIT_TITLE = getString(R.string.update_habit_fragment);
+
+        if (getArguments() != null) {
+            id = getArguments().getInt(HABIT_ID);
+            habit = db.getHabit(id);
+        } else {
+            // Reset the habit
+            habit = null;
+        }
     }
 
     @Override
@@ -73,8 +106,8 @@ public class CreateHabitFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.create_habit_menu,menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        inflater.inflate(R.menu.create_habit_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -100,6 +133,12 @@ public class CreateHabitFragment extends Fragment {
         IHabit habit = new Habit(name,summary);
         db.addHabit(habit);
         db.close();
+    }
+
+    public boolean updateHabit() {
+        boolean isSuccess = true;
+
+        return true;
     }
 
 }
