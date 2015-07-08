@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits {
 
+
     // Logcat tag
     private static final String LOG = DatabaseHelper.class.getName();
 

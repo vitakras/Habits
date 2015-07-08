@@ -5,11 +5,14 @@
     android:id="@+id/habit_row"
     android:layout_width="fill_parent"
     android:layout_height="100dp"
+    android:layout_margin="10dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardUseCompatPadding="true">
     
     <TextView
         android:id="@+id/habit_name_textView"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:text="@string/hint_habit_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,6 +24,9 @@
     <TextView
         android:id="@+id/habit_summary_textView"
         android:text="@string/hint_habit_summary"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
