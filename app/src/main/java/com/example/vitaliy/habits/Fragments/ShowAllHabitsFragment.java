@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.vitaliy.habits.Adapters.HabitsDrawerAdapter;
-import com.example.vitaliy.habits.DB.DatabaseHelper;
+import com.example.vitaliy.habits.DB.DataBaseHelper;
 import com.example.vitaliy.habits.Interfaces.IHabit;
 import com.example.vitaliy.habits.R;
 
@@ -84,7 +84,7 @@ public class ShowAllHabitsFragment extends Fragment implements View.OnClickListe
      * @return
      */
     public List<IHabit> getData() {
-        DatabaseHelper db = new DatabaseHelper(getActivity().getApplicationContext());
+        DataBaseHelper db = new DataBaseHelper(getActivity().getApplicationContext());
         return db.getAllHabits();
     }
 

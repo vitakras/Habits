@@ -3,7 +3,7 @@ package com.example.vitaliy.habits;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
-import com.example.vitaliy.habits.DB.DatabaseHelper;
+import com.example.vitaliy.habits.DB.DataBaseHelper;
 import com.example.vitaliy.habits.Interfaces.IHabit;
 import com.example.vitaliy.habits.Models.Habit;
 
@@ -11,13 +11,13 @@ import com.example.vitaliy.habits.Models.Habit;
  * Created by Vitaliy on 15-06-17.
  */
 public class DatabaseTest extends AndroidTestCase {
-    private DatabaseHelper db;
+    private DataBaseHelper db;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
-        db = new DatabaseHelper(context);
+        db = new DataBaseHelper(context);
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.vitaliy.habits.Interfaces.IHabit;
-import com.example.vitaliy.habits.Interfaces.IDatabaseHabits;
+import com.example.vitaliy.habits.Interfaces.IDataBaseHabits;
 import com.example.vitaliy.habits.Models.Habit;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.List;
 /**
  * Created by Vitaliy on 15-06-17.
  */
-public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits {
+public class DataBaseHelper extends SQLiteOpenHelper implements IDataBaseHabits {
 
 
     // Logcat tag
-    private static final String LOG = DatabaseHelper.class.getName();
+    private static final String LOG = DataBaseHelper.class.getName();
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements IDatabaseHabits 
             + HabitsContract.HabitColumns.COLUMN_NAME_NAME + " TEXT,"
             + HabitsContract.HabitColumns.COLUMN_NAME_SUMMARY + " TEXT)";
 
-    public DatabaseHelper(Context context) {
+    public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.vitaliy.habits.DB.DatabaseHelper;
+import com.example.vitaliy.habits.DB.DataBaseHelper;
 import com.example.vitaliy.habits.Interfaces.IHabit;
 import com.example.vitaliy.habits.Models.Habit;
 import com.example.vitaliy.habits.R;
@@ -32,7 +32,7 @@ public class CreateHabitFragment extends Fragment {
     private static String UPDATE_HABIT_TITLE;
 
 
-    private static DatabaseHelper db;
+    private static DataBaseHelper db;
     private static IHabit habit;
     private static int id;
 
@@ -65,7 +65,7 @@ public class CreateHabitFragment extends Fragment {
         @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = new DatabaseHelper(getActivity().getApplicationContext());
+        db = new DataBaseHelper(getActivity().getApplicationContext());
 
         setHasOptionsMenu(true);
         // Initilize Titles

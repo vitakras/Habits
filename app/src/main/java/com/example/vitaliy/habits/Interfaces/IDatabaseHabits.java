@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Vitaliy on 15-06-15.
  */
-public interface IDatabaseHabits {
+public interface IDataBaseHabits {
 
     /**
      * Add a new habit into the db

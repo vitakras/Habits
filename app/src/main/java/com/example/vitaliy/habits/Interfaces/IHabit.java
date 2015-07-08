@@ -1,5 +1,7 @@
 package com.example.vitaliy.habits.Interfaces;
 
+import com.example.vitaliy.habits.Enums.HabitType;
+
 /**
  * Created by Vitaliy on 15-06-15.
  */
@@ -40,4 +42,28 @@ public interface IHabit {
      * @return get summary of the habit
      */
     public String getSummary();
+
+    /**
+     * Set if the habit is currently enabled or not
+     * @param isEnabled
+     */
+    public void setEnabled(boolean isEnabled);
+
+    /**
+     * Return if the habit is currently enabled or not
+     * @return
+     */
+    public boolean getEnabled();
+
+    /**
+     * Sets the type of the habit
+     * @param type
+     */
+    public void setHabitType(HabitType type);
+
+    /**
+     * Returns the type of habit
+     * @return
+     */
+    public HabitType getHabitType();
 }
